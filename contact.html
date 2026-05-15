@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KINETIX - Contactez-nous</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            kinetixDark: '#2C3E46',
+            kinetixTeal: '#1ABC9C',
+            kinetixOrange: '#FF8A5B',
+            kinetixBg: '#F4F4F4'
+          }
+        }
+      }
+    }
+  </script>
+
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="bg-kinetixBg text-kinetixDark font-sans flex flex-col min-h-screen">
+
+<header class="bg-white shadow-sm sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto flex items-center justify-between px-4 py-3">
+
+    <a href="index.html" class="flex items-center gap-3">
+      <img src="assets/logo.jpeg" alt="KINETIX Logo" class="h-10 w-auto" />
+      <span class="font-bold tracking-wide text-xl">KINETIX</span>
+    </a>
+
+    <nav class="hidden md:flex items-center gap-2 text-sm font-medium">
+      <a href="index.html" class="px-3 py-2 rounded-xl transition duration-300 hover:bg-emerald-50 hover:text-kinetixTeal">Accueil</a>
+      <a href="apropos.html" class="px-3 py-2 rounded-xl transition duration-300 hover:bg-emerald-50 hover:text-kinetixTeal">À Propos</a>
+      <a href="services.html" class="px-3 py-2 rounded-xl transition duration-300 hover:bg-emerald-50 hover:text-kinetixTeal">Services</a>
+      <a href="contact.html" class="px-3 py-2 rounded-xl bg-orange-50 text-kinetixOrange font-bold transition duration-300 hover:bg-orange-100">Contact</a>
+    </nav>
+
+    <button id="menuBtn" class="md:hidden p-2 rounded-xl hover:bg-gray-100">
+      <i data-lucide="menu"></i>
+    </button>
+  </div>
+
+  <div id="mobileMenu" class="hidden md:hidden bg-white border-t px-4 py-3 space-y-1">
+    <a href="index.html" class="block py-2 px-3 rounded-lg hover:bg-emerald-50 hover:text-kinetixTeal">Accueil</a>
+    <a href="apropos.html" class="block py-2 px-3 rounded-lg hover:bg-emerald-50 hover:text-kinetixTeal">À Propos</a>
+    <a href="services.html" class="block py-2 px-3 rounded-lg hover:bg-emerald-50 hover:text-kinetixTeal">Services</a>
+    <a href="contact.html" class="block py-2 px-3 rounded-lg bg-orange-50 text-kinetixOrange font-bold">Contact</a>
+  </div>
+</header>
+
+<main class="flex-grow max-w-7xl w-full mx-auto px-4 py-10">
+  
+  <div class="text-center mb-12">
+    <h1 class="text-3xl md:text-4xl font-extrabold text-kinetixDark">Contactez-nous</h1>
+    <p class="mt-3 text-gray-600 max-w-xl mx-auto">
+      Une question ou besoin d'un rendez-vous ? Laissez-nous un message ou contactez-nous directement.
+    </p>
+  </div>
+
+  <div class="grid lg:grid-cols-3 gap-8">
+    
+    <div class="space-y-4">
+      <h2 class="text-xl font-bold mb-4">Informations Directes</h2>
+      
+      <a href="https://wa.me/212600000000" target="_blank" class="block bg-emerald-50 border border-emerald-200 rounded-2xl p-5 hover:shadow-md transition duration-300">
+        <div class="flex items-center gap-4">
+          <div class="bg-emerald-500 text-white p-3 rounded-xl flex items-center justify-center shadow-sm">
+            <i data-lucide="message-square" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-emerald-800">WhatsApp</h3>
+            <p class="text-sm text-gray-600 mt-0.5">Discutez en direct</p>
+            <p class="text-sm font-semibold text-emerald-600 mt-1">+212 600-000000</p>
+          </div>
+        </div>
+      </a>
+
+      <a href="mailto:contact@kinetix.ma" class="block bg-sky-50 border border-sky-200 rounded-2xl p-5 hover:shadow-md transition duration-300">
+        <div class="flex items-center gap-4">
+          <div class="bg-sky-500 text-white p-3 rounded-xl flex items-center justify-center shadow-sm">
+            <i data-lucide="mail" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-sky-800">Email professionnel</h3>
+            <p class="text-sm text-gray-600 mt-0.5">contact@kinetix.ma</p>
+          </div>
+        </div>
+      </a>
+
+      <div class="bg-white border rounded-2xl p-5 shadow-sm">
+        <div class="flex items-center gap-4">
+          <div class="bg-kinetixDark text-white p-3 rounded-xl flex items-center justify-center">
+            <i data-lucide="map-pin" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-kinetixDark">Adresse Centre</h3>
+            <p class="text-sm text-gray-600 mt-0.5">CMC - Tanger, Maroc</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lg:col-span-2 bg-white rounded-2xl p-6 md:p-8 border shadow-sm">
+      <h2 class="text-xl font-bold mb-6">Envoyer un Message</h2>
+      
+      <form id="contactForm" class="space-y-4">
+        <div class="grid md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-semibold mb-1 text-gray-700">Nom Complet</label>
+            <input type="text" required class="w-full border rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-kinetixTeal" placeholder="Votre nom" />
+          </div>
+          <div>
+            <label class="block text-sm font-semibold mb-1 text-gray-700">Téléphone</label>
+            <input type="tel" required class="w-full border rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-kinetixTeal" placeholder="+212 600-000000" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold mb-1 text-gray-700">Adresse Email</label>
+          <input type="email" required class="w-full border rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-kinetixTeal" placeholder="exemple@mail.com" />
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold mb-1 text-gray-700">Sujet / Motif de consultation</label>
+          <select class="w-full border rounded-xl px-4 py-2.5 bg-white focus:outline-none focus:ring-2 focus:ring-kinetixTeal">
+            <option>Physiothérapie Infantile</option>
+            <option>Analyse du Mouvement</option>
+            <option>Demande d'informations</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold mb-1 text-gray-700">Votre Message</label>
+          <textarea rows="4" required class="w-full border rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-kinetixTeal" placeholder="Décrivez votre besoin..."></textarea>
+        </div>
+
+        <button type="submit" class="w-full bg-kinetixTeal text-white font-bold py-3 px-6 rounded-xl hover:bg-opacity-90 transition shadow-sm">
+          Envoyer le message
+        </button>
+      </form>
+    </div>
+
+  </div>
+</main>
+
+<footer class="bg-white border-t">
+  <div class="max-w-7xl mx-auto px-4 py-6 text-center text-sm text-gray-500">
+    © 2026 KINETIX. All rights reserved.
+  </div>
+</footer>
+
+<script>
+  lucide.createIcons();
+
+  const menuBtn = document.getElementById("menuBtn");
+  const mobileMenu = document.getElementById("mobileMenu");
+  menuBtn.addEventListener("click", () => {
+    mobileMenu.classList.toggle("hidden");
+  });
+
+  const SUPABASE_URL = "https://mlanxwqabpkhxgrqjwlj.supabase.co";
+  const SUPABASE_ANON_KEY = "sb_publishable_H5UD5yOs0HtccXLC6quaVQ_Quuxhl0e"; 
+
+  const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  const contactForm = document.getElementById("contactForm");
+  contactForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const inputs = contactForm.querySelectorAll('input, select, textarea');
+    
+    const messageData = {
+      nom: inputs[0].value,
+      tel: inputs[1].value,
+      email: inputs[2].value,
+      sujet: inputs[3].value,
+      message: inputs[4].value
+    };
+
+    const { data, error } = await supabaseClient
+      .from('messages')
+      .insert([messageData]);
+
+    if (error) {
+      alert("Erreur lors de l'envoi: " + error.message);
+    } else {
+      alert("Merci! Votre message a été enregistré avec succès.");
+      contactForm.reset();
+    }
+  });
+</script>
+
+</body>
+</html>

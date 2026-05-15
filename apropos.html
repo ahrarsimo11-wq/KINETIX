@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KINETIX - À Propos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            kinetixDark: '#2C3E46',
+            kinetixTeal: '#1ABC9C',
+            kinetixOrange: '#FF8A5B',
+            kinetixBg: '#F4F4F4'
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-kinetixBg text-kinetixDark font-sans flex flex-col min-h-screen">
+
+<header class="bg-white shadow-sm sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto flex items-center justify-between px-4 py-3">
+    <a href="index.html" class="flex items-center gap-3">
+      <img src="assets/logo.jpeg" alt="KINETIX Logo" class="h-10 w-auto" />
+      <span class="font-bold tracking-wide text-xl">KINETIX</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-2 text-sm font-medium">
+      <a href="index.html" class="px-3 py-2 rounded-xl transition duration-300 hover:bg-emerald-50 hover:text-kinetixTeal">Accueil</a>
+      <a href="apropos.html" class="px-3 py-2 rounded-xl bg-orange-50 text-kinetixOrange font-bold transition duration-300 hover:bg-orange-100">À Propos</a>
+      <a href="services.html" class="px-3 py-2 rounded-xl transition duration-300 hover:bg-emerald-50 hover:text-kinetixTeal">Services</a>
+      <a href="contact.html" class="px-3 py-2 rounded-xl transition duration-300 hover:bg-emerald-50 hover:text-kinetixTeal">Contact</a>
+    </nav>
+    <button id="menuBtn" class="p-2 rounded-xl hover:bg-gray-100 md:hidden">
+      <i data-lucide="menu"></i>
+    </button>
+  </div>
+  <div id="mobileMenu" class="hidden bg-white border-t px-4 py-3 space-y-1 md:hidden">
+    <a href="index.html" class="block py-2 px-3 rounded-lg hover:bg-emerald-50 hover:text-kinetixTeal">Accueil</a>
+    <a href="apropos.html" class="block py-2 px-3 rounded-lg bg-orange-50 text-kinetixOrange font-bold">À Propos</a>
+    <a href="services.html" class="block py-2 px-3 rounded-lg hover:bg-emerald-50 hover:text-kinetixTeal">Services</a>
+    <a href="contact.html" class="block py-2 px-3 rounded-lg hover:bg-emerald-50 hover:text-kinetixTeal">Contact</a>
+  </div>
+</header>
+
+<main class="flex-grow max-w-7xl w-full mx-auto px-4 py-10">
+  <div class="text-center mb-12">
+    <h1 class="text-3xl md:text-4xl font-extrabold text-kinetixDark">À Propos de KINETIX</h1>
+    <p class="mt-3 text-gray-600 max-w-xl mx-auto">
+      Découvrez notre vision, notre mission et notre engagement envers le développement moteur et la santé des enfants.
+    </p>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-8 items-center mb-12">
+    <div class="bg-white p-6 md:p-8 rounded-2xl border shadow-sm space-y-6">
+      <div>
+        <h2 class="text-xl font-bold text-emerald-800 mb-2 flex items-center gap-2">
+          <i data-lucide="eye" class="text-kinetixTeal"></i> Notre Vision
+        </h2>
+        <p class="text-gray-600 text-sm leading-relaxed">
+          Devenir la référence en ingénierie du mouvement et physiothérapie infantile, en offrant un accompagnement moderne et scientifique qui permet à chaque enfant de grandir en toute liberté de mouvement.
+        </p>
+      </div>
+      <div>
+        <h2 class="text-xl font-bold text-orange-800 mb-2 flex items-center gap-2">
+          <i data-lucide="target" class="text-kinetixOrange"></i> Notre Mission
+        </h2>
+        <p class="text-gray-600 text-sm leading-relaxed">
+          Optimiser le développement moteur et nutritionnel des enfants grâce à des programmes sur mesure, des analyses biomécaniques précises et un suivi rigoureux adapté aux besoins spécifiques de la croissance.
+        </p>
+      </div>
+    </div>
+
+    <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-6 md:p-8 shadow-sm h-full flex flex-col justify-center">
+      <h2 class="text-2xl font-extrabold text-slate-800 mb-4">Qui sommes-nous ?</h2>
+      <p class="text-gray-600 text-sm leading-relaxed mb-4">
+        Chez KINETIX, nous combinons l'expertise en rééducation motrice et le suivi nutritionnel pour offrir une approche globale. Nous croyons que la santé d'un enfant repose sur l'harmonie entre une activité physique adaptée et une alimentation équilibrée.
+      </p>
+      <p class="text-gray-600 text-sm leading-relaxed">
+        Basé à Tanger, notre centre accueille les familles avec bienveillance et professionnalisme pour garantir les meilleurs résultats à long terme.
+      </p>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-2xl p-6 border shadow-sm">
+    <h2 class="text-xl font-bold mb-6 text-center">Nos Valeurs Fondamentales</h2>
+    <div class="grid sm:grid-cols-3 gap-6 text-center">
+      <div class="p-4 bg-gray-50 rounded-xl">
+        <i data-lucide="heart" class="mx-auto mb-2 text-kinetixOrange"></i>
+        <h4 class="font-bold text-sm mb-1">Bienveillance</h4>
+        <p class="text-xs text-gray-500">Un accueil chaleureux et adapté à la sensibilité de chaque enfant.</p>
+      </div>
+      <div class="p-4 bg-gray-50 rounded-xl">
+        <i data-lucide="award" class="mx-auto mb-2 text-kinetixTeal"></i>
+        <h4 class="font-bold text-sm mb-1">Excellence</h4>
+        <p class="text-xs text-gray-500">Des protocoles basés sur les dernières avancées scientifiques.</p>
+      </div>
+      <div class="p-4 bg-gray-50 rounded-xl">
+        <i data-lucide="users" class="mx-auto mb-2 text-sky-500"></i>
+        <h4 class="font-bold text-sm mb-1">Engagement</h4>
+        <p class="text-xs text-gray-500">Un suivi personnalisé et proche pour chaque famille.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="bg-white border-t mt-12">
+  <div class="max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row justify-between items-center gap-4">
+    <p class="text-sm text-gray-500">
+      © 2026 KINETIX. All rights reserved.
+    </p>
+    <div class="flex gap-4 text-gray-600">
+      <i data-lucide="facebook" class="w-5 h-5 cursor-pointer hover:text-kinetixTeal transition"></i>
+      <i data-lucide="twitter" class="w-5 h-5 cursor-pointer hover:text-kinetixTeal transition"></i>
+      <i data-lucide="tiktok" class="w-5 h-5 cursor-pointer hover:text-kinetixTeal transition"></i>
+      <i data-lucide="youtube" class="w-5 h-5 cursor-pointer hover:text-kinetixTeal transition"></i>
+    </div>
+  </div>
+</footer>
+
+<script>
+  lucide.createIcons();
+  const menuBtn = document.getElementById("menuBtn");
+  const mobileMenu = document.getElementById("mobileMenu");
+  menuBtn.addEventListener("click", () => {
+    mobileMenu.classList.toggle("hidden");
+  });
+</script>
+
+</body>
+</html>

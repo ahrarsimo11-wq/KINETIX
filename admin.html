@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KINETIX - Admin Panel (Cloud)</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            kinetixDark: '#2C3E46',
+            kinetixTeal: '#1ABC9C',
+            kinetixOrange: '#FF8A5B',
+            kinetixBg: '#F4F4F4'
+          }
+        }
+      }
+    }
+  </script>
+
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="bg-kinetixBg text-kinetixDark font-sans flex flex-col min-h-screen">
+
+<header class="bg-white shadow-sm sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto flex items-center justify-between px-4 py-3">
+
+    <a href="index.html" class="flex items-center gap-3">
+      <img src="assets/logo.jpeg" alt="KINETIX Logo" class="h-10 w-auto" />
+      <span class="font-bold tracking-wide text-xl">KINETIX</span>
+    </a>
+
+    <nav class="hidden md:flex items-center gap-2 text-sm font-medium">
+      <a href="index.html" class="px-3 py-2 rounded-xl transition duration-300 hover:bg-emerald-50 hover:text-kinetixTeal">Accueil</a>
+      <a href="#" class="px-3 py-2 rounded-xl transition duration-300 hover:bg-emerald-50 hover:text-kinetixTeal">À Propos</a>
+      <a href="#" class="px-3 py-2 rounded-xl transition duration-300 hover:bg-emerald-50 hover:text-kinetixTeal">Services</a>
+      <a href="contact.html" class="px-3 py-2 rounded-xl transition duration-300 hover:bg-emerald-50 hover:text-kinetixTeal">Contact</a>
+    </nav>
+
+    <button id="menuBtn" class="md:hidden p-2 rounded-xl hover:bg-gray-100">
+      <i data-lucide="menu"></i>
+    </button>
+  </div>
+
+  <div id="mobileMenu" class="hidden md:hidden bg-white border-t px-4 py-3 space-y-1">
+    <a href="index.html" class="block py-2 px-3 rounded-lg hover:bg-emerald-50 hover:text-kinetixTeal">Accueil</a>
+    <a href="#" class="block py-2 px-3 rounded-lg hover:bg-emerald-50 hover:text-kinetixTeal">À Propos</a>
+    <a href="#" class="block py-2 px-3 rounded-lg hover:bg-emerald-50 hover:text-kinetixTeal">Services</a>
+    <a href="contact.html" class="block py-2 px-3 rounded-lg hover:bg-emerald-50 hover:text-kinetixTeal">Contact</a>
+  </div>
+</header>
+
+<main class="flex-grow max-w-7xl w-full mx-auto px-4 py-10">
+  
+  <div class="bg-white p-6 rounded-2xl shadow-sm border">
+    
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+      <div>
+        <h1 class="text-2xl font-bold text-kinetixDark flex items-center gap-2">
+          <i data-lucide="shield-check" class="text-kinetixTeal"></i> Messages Reçus (Supabase)
+        </h1>
+        <p class="text-sm text-gray-500 mt-1">Consultez et gérez les messages envoyés depuis le formulaire cloud.</p>
+      </div>
+      
+      <button id="refreshBtn" class="bg-kinetixTeal text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-opacity-90 transition flex items-center gap-2 shadow-sm">
+        <i data-lucide="refresh-cw" class="w-4 h-4"></i> Actualiser
+      </button>
+    </div>
+
+    <div class="overflow-x-auto border rounded-xl">
+      <table class="w-full text-left border-collapse">
+        <thead>
+          <tr class="bg-slate-700 text-white text-sm">
+            <th class="p-4 font-semibold">Date / ID</th>
+            <th class="p-4 font-semibold">Nom Complet</th>
+            <th class="p-4 font-semibold">Contacts</th>
+            <th class="p-4 font-semibold">Sujet / Motif</th>
+            <th class="p-4 font-semibold">Message</th>
+          </tr>
+        </thead>
+        <tbody id="adminTableBody" class="text-sm text-gray-700 divide-y bg-white">
+          <tr>
+            <td colspan="5" class="p-8 text-center text-gray-400">
+              <div class="flex flex-col items-center justify-center gap-2">
+                <i data-lucide="loader-2" class="w-6 h-6 animate-spin text-kinetixTeal"></i>
+                <span>Chargement des messages en cours...</span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</main>
+
+<footer class="bg-white border-t mt-10">
+  <div class="max-w-7xl mx-auto px-4 py-6 text-center text-sm text-gray-500">
+    © 2026 KINETIX. Panel Admin Privé.
+  </div>
+</footer>
+
+<script>
+  // تشغيل الأيقونات
+  lucide.createIcons();
+
+  // Mobile menu toggle
+  const menuBtn = document.getElementById("menuBtn");
+  const mobileMenu = document.getElementById("mobileMenu");
+  menuBtn.addEventListener("click", () => {
+    mobileMenu.classList.toggle("hidden");
+  });
+
+  // معلومات الـ Supabase الحقيقية ديالك اللي حطيتي
+  const SUPABASE_URL = "https://mlanxwqabpkhxgrqjwlj.supabase.co";
+  const SUPABASE_ANON_KEY = "sb_publishable_H5UD5yOs0HtccXLC6quaVQ_Quuxhl0e"; 
+
+  // إنشاء الإتصال
+  const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  const tbody = document.getElementById('adminTableBody');
+  const refreshBtn = document.getElementById('refreshBtn');
+
+  // دالة جلب البيانات من الـ Cloud وعرضها ف الجدول
+  async function fetchMessages() {
+    // إظهار لودر التحميل
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="5" class="p-8 text-center text-gray-400">
+          <div class="flex flex-col items-center justify-center gap-2">
+            <i data-lucide="loader-2" class="w-6 h-6 animate-spin text-kinetixTeal"></i>
+            <span>Récupération des données...</span>
+          </div>
+        </td>
+      </tr>
+    `;
+    lucide.createIcons();
+    
+    // Fetch البيانات من جدول messages
+    const { data: messages, error } = await supabaseClient
+      .from('messages')
+      .select('*')
+      .order('id', { ascending: false }); // ترتيب: الجديد هو الأول
+
+    if (error) {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="5" class="p-6 text-center text-red-500 font-semibold bg-red-50">
+            Erreur lors de la récupération: ${error.message}
+          </td>
+        </tr>
+      `;
+      return;
+    }
+
+    if (!messages || messages.length === 0) {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="5" class="p-8 text-center text-gray-400">
+            Aucun message reçu pour le moment.
+          </td>
+        </tr>
+      `;
+      return;
+    }
+
+    // تعمير الجدول بالبيانات الحقيقية
+    tbody.innerHTML = '';
+    messages.forEach(msg => {
+      // إستعمال تاريخ الـ Cloud يلا كان، ولا الـ ID كبديل
+      const dateDisplay = msg.created_at ? new Date(msg.created_at).toLocaleString('fr-FR') : `ID: ${msg.id}`;
+      
+      tbody.innerHTML += `
+        <tr class="border-b hover:bg-gray-50 transition">
+          <td class="p-4 text-gray-500 whitespace-nowrap font-medium">${dateDisplay}</td>
+          <td class="p-4 font-bold text-slate-800">${msg.nom}</td>
+          <td class="p-4 leading-relaxed">
+            <span class="font-medium">${msg.email}</span><br>
+            <span class="text-xs text-gray-500">${msg.tel}</span>
+          </td>
+          <td class="p-4">
+            <span class="bg-teal-100 text-teal-800 text-xs px-2.5 py-1 rounded-full font-semibold">
+              ${msg.sujet}
+            </span>
+          </td>
+          <td class="p-4 text-gray-600 max-w-xs break-words">${msg.message}</td>
+        </tr>
+      `;
+    });
+  }
+
+  // ربط زر التحديث بالدالة
+  refreshBtn.addEventListener('click', fetchMessages);
+  
+  // تشغيل الدالة تلقائياً عند تحميل الصفحة
+  fetchMessages();
+</script>
+
+</body>
+</html>
